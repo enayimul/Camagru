@@ -27,7 +27,7 @@
     <title>Login Page</title>
 </head>
 <body>
-<h2>User Authentication System </h2><hr>
+<h2>CAMAGRU</h2><hr>
 
 <h3>Login Form</h3>
 

@@ -5,7 +5,7 @@
     <title>Homepage</title>
 </head>
 <body>
-<h2>User Authentication System </h2><hr>
+<h2>CAMAGRU</h2><hr>
 
 <P>You are currently not signed in <a href="login.php">Login</a> Not yet a member? <a href="./signup.php">Sign up</a> </P>
 
