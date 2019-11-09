@@ -1,14 +1,25 @@
 <?php
-include("database.php");
+include("includes/setup.php");
+include("includes/database.php");
 $msg = "";
-if(isset($_POST['submit'])){
-  $username = $_GET['username'];
+if(isset($_GET['link'])){
+  $link = $_GET['link'];
   try{
-      $sql = "UPDATE users SET verified = 1 WHERE username =  '$username'";
-      $db->exec($sql);
-      header("location: sign.php");
-      echo "your email has been verified you may login";
-  }
+    $exists = $db->prepare("SELECT * FROM users WHERE link='$link' LIMIT 1");
+    $exists->execute();
+    if ($exists->rowCount() == 1){
+      $sql = $db->prepare("UPDATE users SET email_verify = 1 WHERE link = '$link'");
+      $sql->execute();
+      if ($sql){
+        echo "your email has been verified you may login";
+        //header("location: login.php");
+        echo "<a href='login.php'> sign in </a>";
+      }
+      else {
+        echo"did not work";
+      }
+      }
+    }
   catch(PDOException $ex){
       $msg = "error";
       echo $msg;

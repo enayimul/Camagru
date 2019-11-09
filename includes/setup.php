@@ -28,6 +28,7 @@ try {
         email VARCHAR(30) NOT NULL,
         passwd VARCHAR(255) NOT NULL,
         -- join_date timestamp,
+        link VARCHAR(255) NOT NULL,
         email_verify BOOLEAN
         )";
     $db->exec($sql);

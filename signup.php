@@ -42,7 +42,7 @@
         <tr><td>Email:</td> <td><input type="text" value=""name="email"></td></tr>
         <tr><td>Username:</td> <td><input type="text" value=""name="username"></td></tr>
         <tr><td>Password:</td> <td><input id="pass" type="password" value=""name="passwrd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></td></tr>
-        <tr><td><td><input id="submitform" style="float: right" type="submit" value="Sign up"></td></tr>
+        <tr><td><td><input id="submitform" style="float: right" name="register" type="submit" value="Sign up"></td></tr>
     </table>
 <p><a href="index.php">Back</a> </p>
 </body>
