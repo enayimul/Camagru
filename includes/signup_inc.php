@@ -1,7 +1,7 @@
 <?php
 require 'database.php';
 require 'setup.php';
-var_dump($_POST);
+//var_dump($_POST);
 
 if (isset($_POST['email'])){
     echo "here";

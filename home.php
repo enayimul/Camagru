@@ -1,5 +1,9 @@
 <!DOCTYPE >
-<?php session_start(); ?>
+<?php session_start();
+    ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+?>
 <html>
     <head>
         <link rel="stylesheet" href="style2.css"/>
@@ -9,7 +13,7 @@
 
     <body>
         <?php
-            if (!isset($_SESSION['success'])) header('location: index.php');
+            //if (!isset($_SESSION['success'])) header('location: index.php');
         ?>
         <div class="main_wrapper">
             
