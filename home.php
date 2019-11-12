@@ -28,12 +28,14 @@
                     <li><a href="?link=3" name="link3">Upload</a></li>
                     <li><a href="?link=4" name="link4">Account settings</a></li>
                     <li><a href="?link=5" name="link5">Logout</a></li>
+                    <li><a href="?link=6" name="link6">Screenshot</a>
                 </ul>
             </div>
 
             <div id="content_area">
             <div id="content_box">
                 <?php
+                    echo $_POST['img'];
                     $link = $_GET['link'];
                     if ($link == '1'){
                         echo "feed";
@@ -48,6 +50,7 @@
                         echo "<form action='' method='post' enctype='multipart/form-data'>";
                         echo "<input type='file' name='image'/>
                         <input type='submit' name='insert_post' value='Post'/>";
+                        
                         // if(isset($_POST['insert_post']))
                         // {
                         // $product_title = $_POST['product_title'];
@@ -101,6 +104,15 @@
                         unset($_SESSION['success']);
                         header('location: index.php');
                         //var_dump($_SESSION);
+                    }
+                    else if ($link == '6')
+                    {
+                        echo '<div style="display: flex"><div style="display: grid"><video id="video" autoplay></video><button id="snap" style="width: 80px">Capture</button></div><div style="display: grid"><canvas id="canvas" width=300 height=300></canvas><button id="save" style="width: 80px">Save</button></div></div><script src="camera.js"></script>';
+                        $img = $_POST['img'];
+                       
+                        $new_name = uniqid().".png";
+                        $dest = "resources/saved_images/".$new_name;
+                        file_put_contents($dest, $img);
                     }
                     else
                     {  
