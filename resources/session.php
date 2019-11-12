@@ -91,7 +91,7 @@ if(count($errors) == 0){
         }
     } else {
         echo "<script>window.alert('Error: wrong username/password')</script>";
-        header( "refresh:0; url=index.php" );
+        header( "refresh:0; url=../index.php" );
     }
 }
 }

@@ -124,8 +124,6 @@ error_reporting(E_ALL);
             <div>
             <!-- need processing to happen only if password is correct -->
                 <form action="resources/session.php" method="post" onsubmit="return chkpwd()">
-
-                    <?php include('errors.php') ?>
             
                     <div class="textbox">
                         <input type="text" placeholder="Username" name="username" value="" required/>

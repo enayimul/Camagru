@@ -8,7 +8,7 @@ try {
     $sql = "CREATE DATABASE IF NOT EXISTS camagru";
     // use exec() because no results are returned
     $db->exec($sql);
-    echo "Database created successfully<br>";
+    echo "Database created successfully <br>";
     }
     catch(PDOException $e)
     {
