@@ -76,9 +76,9 @@
                         echo "
                         <div>
                             <h3>Modify account</h3>
-                                <form action='mod.php' method='post'>
+                                <form action='update_details.php' method='post'>
                                 <div>
-                                <?php include('mod.php');?>
+                                <?php include('update_details.php');?>
                                 <input type='text' placeholder='New Username' name='new_username' value='' />
                                 </div>
                                 <div>

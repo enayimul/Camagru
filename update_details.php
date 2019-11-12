@@ -1,4 +1,9 @@
-<?php include('includes/database.php');?>
+<?php include('includes/setup.php');?>
+<?php //session_start();
+    ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+?>
 <?php
 	session_start();
 	$sessionuser = $_SESSION['username'];
