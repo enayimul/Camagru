@@ -123,7 +123,7 @@ error_reporting(E_ALL);
 
             <div>
             <!-- need processing to happen only if password is correct -->
-                <form action="session.php" method="post" onsubmit="return chkpwd()">
+                <form action="resources/session.php" method="post" onsubmit="return chkpwd()">
 
                     <?php include('errors.php') ?>
             

@@ -64,7 +64,7 @@ ini_set('display_errors', 1);
             <h2>Login</h2>
 
             <div>
-                <form action="session.php" method="post">
+                <form action="resources/session.php" method="post">
             
                     <div class="textbox">
                         <input type="text" placeholder="Username" name="username" value="" required/>

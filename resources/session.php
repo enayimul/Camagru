@@ -1,4 +1,4 @@
-<?php include('includes/database.php');?>
+<?php include('../includes/setup.php');?>
 <?php
 session_start();
 if(isset($_POST['register'])){
@@ -22,7 +22,7 @@ if(isset($_POST['register'])){
     if($password_2 != $password_1) {array_push($errors, "Passwords do not match");}
 //////////////////////////////////////////////////////////////////////////////////////
 ////////unique usernames or email////////////////////////////////////////////////////////////////////////// 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = '$username' or email = '$email' LIMIT 1");
+    $stmt = $db->prepare("SELECT * FROM users WHERE username = '$username' or email = '$email' LIMIT 1");
     $stmt->execute();
     $user = $stmt->fetchAll();
     if ($user)
@@ -36,12 +36,12 @@ if(isset($_POST['register'])){
 //////register user if no errors/////////////////////////////////////////////////////////////////////////////////////////
     if (count($errors) == 0){
         //$password = md5($password_1);
-        $sql = $conn->prepare("INSERT INTO users (username, email, passwd, link) VALUES ('$username', '$email', '$password', '$link')");
+        $sql = $db->prepare("INSERT INTO users (username, email, passwd, link) VALUES ('$username', '$email', '$password', '$link')");
         $sql->execute();
         if ($sql){
             $to      = $email;
             $subject = 'the subject';
-            $message = "<a href='http://localhost:8080/camagru_research/verify.php?link=$link'>Confirm Account</a>";
+            $message = "<a href='http://localhost:8080/camagru/email_validation.php?link=$link'>Confirm Account</a>";
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <bikad58028@mailnet.top>' . "\r\n";
@@ -71,19 +71,19 @@ if (empty($username1)){array_push($errors, "Username required");}
 if (empty($password1)){array_push($errors, "Password required");}
 if(count($errors) == 0){
     $password1 = md5($password1);
-    $lq = $conn->prepare("SELECT * FROM users WHERE username = '$username1' and passwd='$password1' LIMIT 1");
+    $lq = $db->prepare("SELECT * FROM users WHERE username = '$username1' and passwd='$password1' LIMIT 1");
     $lq->execute();
     $rows = $lq->rowCount();
     if ($rows)
     {
         $row = $lq->fetchAll();
-        $verified = $row[0]['verified'];
+        $verified = $row[0]['email_verify'];
         if ($verified == 1)
         {
             echo "WELCOME";
             $_SESSION['username'] = $username1;
             $_SESSION['success'] = "logged in successfuly";
-            header('location: home.php');
+            header('location: ../home.php');
         }
         else {
             echo "<script>window.alert('Please verify your account')</script>";
