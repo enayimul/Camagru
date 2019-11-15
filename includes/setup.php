@@ -2,22 +2,6 @@
 include("database.php");
 
 try {
-    $db = new PDO("mysql:host=$servername", $db_username, $db_password);
-    // set the PDO error mode to exception
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "CREATE DATABASE IF NOT EXISTS camagru";
-    // use exec() because no results are returned
-    $db->exec($sql);
-    echo "Database created successfully <br>";
-    }
-    catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }
-
-
-
-try {
     $db = new PDO("mysql:host=$servername;dbname=camagru", $db_username, $db_password);
     // set the PDO error mode to exception
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -32,6 +16,12 @@ try {
         email_verify BOOLEAN
         )";
     $db->exec($sql);
+    $sql = "CREATE TABLE IF NOT EXISTS pictures (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        username VARCHAR(20) NOT NULL,
+        imagename VARCHAR(100) NOT NULL
+        )";
+        $db->exec($sql);
     }
     catch(PDOException $e)
     {
