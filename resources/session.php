@@ -1,6 +1,8 @@
-<?php include('../includes/setup.php');?>
+
 <?php
-session_start();
+
+ include('../includes/database.php');
+ session_start();
 if(isset($_POST['register'])){
     
     $username = "";
@@ -10,7 +12,7 @@ if(isset($_POST['register'])){
 ///////////////////////////////////////////////////////////////////////////////////
 ////////register users, retrieve form information//////////////////////////////////
     //mysli_real_escape_string??
-    $username =  $_POST['username'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password_1 = $_POST['password_1']; 
     $password_2 = $_POST['password_2'];
@@ -58,7 +60,7 @@ if(isset($_POST['register'])){
         // echo "A verification email has been sent to $email";
         // echo "<p>confirmed account?".'<a href="index.php">Link</a>';
     } else {
-        echo "Errors: <a href='index.php'>Go Back</a>";
+        echo "Errors: <a href='../index.php'>Go Back</a>";
         print_r($errors);
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
