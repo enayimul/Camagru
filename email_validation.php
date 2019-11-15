@@ -1,5 +1,5 @@
 <?php
-include("includes/setup.php");
+include("config/setup.php");
 $msg = "";
 if(isset($_GET['link'])){
   $link = $_GET['link'];

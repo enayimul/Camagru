@@ -1,8 +1,8 @@
 <!DOCTYPE >
 <?php session_start();
-    ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
+	// ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
 ?>
 <html>
     <head>
@@ -25,10 +25,10 @@
                 <ul id="menu">
                     <li><a href="?link=1" name="link1">Home</a></li>
                     <li><a href="?link=2" name="link2">Gallery</a></li>
-                    <li><a href="?link=3" name="link3">Upload</a></li>
+                    <li><a href="uploads.php" name="link3">Upload</a></li>
                     <li><a href="?link=4" name="link4">Account settings</a></li>
                     <li><a href="?link=5" name="link5">Logout</a></li>
-                    <li><a href="?link=6" name="link6">Screenshot</a>
+                    <li><a href="capture.php" name="link6">Screenshot</a>
                 </ul>
             </div>
 
@@ -46,31 +46,7 @@
                     }
                     else if ($link == '3')
                     {
-                        echo "post image";
-                        echo "<form action='' method='post' enctype='multipart/form-data'>";
-                        echo "<input type='file' name='image'/>
-                        <input type='submit' name='insert_post' value='Post'/>";
-                        
-                        // if(isset($_POST['insert_post']))
-                        // {
-                        // $product_title = $_POST['product_title'];
-                        // $product_cat = $_POST['product_cat'];
-                        // $product_brand = $_POST['product_brand'];
-                        // $product_price = $_POST['product_price'];
-                        // $product_desc = $_POST['product_desc'];
-                        // //getting images
-                        // $product_image = $_FILES['product_image']['name'];
-                        // $product_image_tmp = $_FILES['product_image']['tmp_name'];
-                        // move_uploaded_file($product_image_tmp, "product_images/$product_image");
-                        // //query to insert
-                        // $insert_product = "insert into products (product_cat, product_brand, product_title, product_price, product_desc, product_img) values ('$product_cat','$product_brand','$product_title','$product_price','$product_desc','$product_image')";
-                        // $insert_pro = mysqli_query($con, $insert_product);
-                        // if($insert_pro)
-                        // {
-                        // echo "<script>alert('Product inserted')</script>";
-                        // echo "<script>window.open('products.php','_self')</script>";
-                        // }
-                        // }
+                    
                     }
                     else if ($link == '4')
                     {
@@ -107,17 +83,17 @@
                     }
                     else if ($link == '6')
                     {
-                        echo '<div style="display: flex"><div style="display: grid"><video id="video" autoplay></video><button id="snap" style="width: 80px">Capture</button></div><div style="display: grid"><canvas id="canvas" width=300 height=300></canvas><button id="save" style="width: 80px">Save</button></div></div><script src="camera.js"></script>';
-                        $img = $_POST['img'];
+                        // echo '<div style="display: flex"><div style="display: grid"><video id="video" autoplay></video><button id="snap" style="width: 80px">Capture</button></div><div style="display: grid"><canvas id="canvas" width=300 height=300></canvas><button id="save" style="width: 80px">Save</button></div></div><script src="camera.js"></script>';
+                        // $img = $_POST['img'];
                        
-                        $new_name = uniqid().".png";
-                        $dest = "resources/saved_images/".$new_name;
-                        file_put_contents($dest, $img);
+                        // $new_name = uniqid().".png";
+                        // $dest = "resources/saved_images/".$new_name;
+                        // file_put_contents($dest, $img);
                     }
                     else
                     {  
                         //var_dump($_SESSION);
-                        echo"default home";
+                        // echo"default home";
                     }
                 ?>
             </div>

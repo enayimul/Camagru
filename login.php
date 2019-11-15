@@ -49,7 +49,7 @@ ini_set('display_errors', 1);
 <p><a href="index.php">Back</a> </p>
 </body>
 </html> -->
-<?php include('includes/database.php');?>
+<?php include('config/database.php');?>
 <?php include('resources/session.php'); ?>
 <!DOCTYPE html>
 <html>

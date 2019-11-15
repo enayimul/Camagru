@@ -1,6 +1,6 @@
 <?php
-include_once('includes/database.php');
-$conn = connectiondb();
+include_once('config/database.php');
+include_once('config/setup.php'); 
 session_start();
 $imgfile = file_get_contents("php://input");
 $x = explode(',', $imgfile);
@@ -12,7 +12,7 @@ if (!file_exists("uploads/"))
 }
 file_put_contents("uploads/".$img_name, $photo);
 $check = "INSERT INTO camagru.pictures (username, imagename) VALUES(?,?)";
-$sql = $conn->prepare($check);
+$sql = $db->prepare($check);
 $sql->execute(['Marsh',$img_name]);
 echo "success";
     

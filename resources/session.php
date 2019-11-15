@@ -1,7 +1,7 @@
 
 <?php
 
- include('../includes/database.php');
+ include('../config/database.php');
  session_start();
 if(isset($_POST['register'])){
     
