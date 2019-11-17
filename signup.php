@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 <html>
 
     <head>
-        <title>Camagru: Register</title>
+        <title>Camagru: register</title>
         <link rel="stylesheet" href="style.css">
         <script>
             function chkpwd(register){
@@ -34,6 +34,7 @@ error_reporting(E_ALL);
                     window.alert("need atleast one number");
                     return false;
                 }
+
                 return true;
             }
         </script>
@@ -45,7 +46,7 @@ error_reporting(E_ALL);
 
             <div>
             <!-- need processing to happen only if password is correct -->
-                <form action="resources/session.php" method="post" onsubmit="//return chkpwd()">
+                <form action="resources/session.php" method="post" onsubmit="//eturn chkpwd()">
             
                     <div class="textbox">
                         <input type="text" placeholder="Username" name="username" value="" required/>
@@ -57,14 +58,14 @@ error_reporting(E_ALL);
 
                     <div class="textbox">
                         <input id="pass" type="password" placeholder="Password" name="password_1" value="" />
-                        <p id="passerror"></p>
+                        <!--p id="passerror"--></p>
                     </div>
 
                     <div class="textbox">
                         <input type="password" placeholder="Confirm Password" name="password_2" value="" required/>
                     </div>
                     <button type="submit" name="register" class="btn"> Sign Up </button>
-                <p>Already have an account?  <a href="index.php">Sign In</a></p>
+                <p>Already have an account?  <a href="login.php">Sign In</a></p>
                 </form>
             </div>
         </div>

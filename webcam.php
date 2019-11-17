@@ -13,7 +13,7 @@ if (!file_exists("uploads/"))
 file_put_contents("uploads/".$img_name, $photo);
 $check = "INSERT INTO camagru.pictures (username, imagename) VALUES(?,?)";
 $sql = $db->prepare($check);
-$sql->execute(['Marsh',$img_name]);
+$sql->execute(['use',$img_name]);
 echo "success";
     
 ?>

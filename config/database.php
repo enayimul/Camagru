@@ -7,9 +7,9 @@ try {
     $db = new PDO("mysql:host=$servername", $db_username, $db_password);
     // set the PDO error mode to exception
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //$sql = "CREATE DATABASE IF NOT EXISTS camagru";
+    $sql = "CREATE DATABASE IF NOT EXISTS camagru";
     // use exec() because no results are returned
-    $db->exec("USE camagru");
+    $db->exec($sql);
    // echo "Database created successfully <br>";
     }
     catch(PDOException $e)

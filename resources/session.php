@@ -1,13 +1,18 @@
 
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
  include('../config/database.php');
  session_start();
+ $errors = array();
+
 if(isset($_POST['register'])){
     
     $username = "";
     $password = "";
-    $errors = array();
+
 //////connecting to db/////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 ////////register users, retrieve form information//////////////////////////////////
@@ -21,16 +26,27 @@ if(isset($_POST['register'])){
     if(empty($username)) {array_push($errors, "Username is required");}
     if(empty($email)) {array_push($errors, "Email is required");}
     if(empty($password_1)) {array_push($errors, "Password is required");}
-    if($password_2 != $password_1) {array_push($errors, "Passwords do not match");}
+    if($password_2 !== $password_1) {array_push($errors, "Passwords do not match");}
 //////////////////////////////////////////////////////////////////////////////////////
 ////////unique usernames or email////////////////////////////////////////////////////////////////////////// 
-    $stmt = $db->prepare("SELECT * FROM users WHERE username = '$username' or email = '$email' LIMIT 1");
-    $stmt->execute();
-    $user = $stmt->fetchAll();
-    if ($user)
+    try
     {
-        if ($user[0]['username'] === $username){array_push($errors, "Username taken");}
-        if ($user[0]['email'] === $email){array_push($errors, "email used");}
+        $db = new PDO("mysql:host=$servername;dbname=camagru", $db_username, $db_password);
+    // set the PDO error mode to exception
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM users WHERE email='$email'";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $user = $stmt->fetch();
+    }
+    catch (PDOException $e)
+    {
+        echo "Error here->".$e->getMessage();
+    }
+    if (!empty($user))
+    {
+        if ($user['username'] === $username){array_push($errors, "Username taken");}
+        if ($user['email'] === $email){array_push($errors, "email used");}
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     $link = md5(time().$username);
@@ -42,20 +58,20 @@ if(isset($_POST['register'])){
         $sql->execute();
         if ($sql){
             $to      = $email;
-            $subject = 'the subject';
+            $subject = 'Camagru Account Confirmation';
             $message = "<a href='http://localhost:8080/camagru/email_validation.php?link=$link'>Confirm Account</a>";
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <bikad58028@mailnet.top>' . "\r\n";
             if(mail($to, $subject, $message, $headers))
             
-            echo "testmail";
+             echo "testmail";
             echo "A verification email has been sent to $email";
         }
         
         //$_SESSION['username'] = $username;
         //$_SESSION['success'] = "You are now logged in";
-        $conn->NULL;
+        //$db->NULL;
         //header('location: test.php');
         // echo "A verification email has been sent to $email";
         // echo "<p>confirmed account?".'<a href="index.php">Link</a>';
@@ -73,6 +89,11 @@ if (empty($username1)){array_push($errors, "Username required");}
 if (empty($password1)){array_push($errors, "Password required");}
 if(count($errors) == 0){
     $password1 = md5($password1);
+
+    /////
+    $db->exec("USE camagru");
+    ////
+
     $lq = $db->prepare("SELECT * FROM users WHERE username = '$username1' and passwd='$password1' LIMIT 1");
     $lq->execute();
     $rows = $lq->rowCount();
@@ -85,6 +106,7 @@ if(count($errors) == 0){
             echo "WELCOME";
             $_SESSION['username'] = $username1;
             $_SESSION['success'] = "logged in successfuly";
+            $_SESSION['logged_in'] = true;
             header('location: ../home.php');
         }
         else {
