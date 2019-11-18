@@ -13,10 +13,7 @@
     document.getElementById('snap').addEventListener('click', function()
     {
         context.drawImage(video, 0, 0, 400, 300);
-    });
-    //save an image
-    document.getElementById('save').addEventListener('click', function(e)
-    {
+
         var image = canvas.toDataURL('image/png');
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function()
@@ -26,7 +23,15 @@
                 alert(this.responseText);
             }
         }
-        xhttp.open("post", "webcam.php",false);
-        xhttp.send(image);
-    })
+        document.getElementById("url").value = image;
+    //     console.log(image);
+    //    xhttp.open("post", "webcam.php",false);
+    //    xhttp.send(image);
+    });
+    //save an image
+    // document.getElementById('save').addEventListener('click', function(e)
+    // {
+       
+   
+    // })
 })();

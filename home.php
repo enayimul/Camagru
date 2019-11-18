@@ -9,6 +9,11 @@
         <link rel="stylesheet" href="style2.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Camagru :home</title>
+        <style>
+        img{
+            padding: 8;
+        }
+        </style>
     </head>
 
     <body>
@@ -57,6 +62,7 @@
                     }
                     else if ($link == '2')
                     {
+                        if(!isset($_SESSION['logged_in'])) header( "refresh:0; url=index.php" );
                         $offset = 0;
                         if(isset($_GET['offset'])){
                             $offset = $_GET['offset'];
@@ -90,11 +96,31 @@
                     }
                     else if ($link == '3')
                     {
+                        if(!isset($_SESSION['logged_in'])) header( "refresh:0; url=home.php?youareloggedout" );
                         include "uploads.php";
                     }
                    if ($link == '4')
                     {
-                        if (!isset($_SESSION['success'])) header('location: index.php');
+                        if (!isset($_SESSION['success'])) header('location: home.php?youareloggedout');
+                        echo "
+                        <div>
+                        <h3>Modify account</h3>
+                            <form action='update_details.php' method='post'>
+                            <div>
+                            <?php include('update_details.php');?>
+                            <input type='text' placeholder='New Username' name='new_username' value='' />
+                            </div>
+                            <div>
+                            <input type='password' placeholder='New Password' name='new_password' value=''/>
+                            </div>
+                            <div>
+                            <input type='email' placeholder='New Email' name='new_email' value='' />
+                            </div>
+                            <button type='submit' name='modify account'> Update </button>
+                            </form>
+                    </div>
+        ";
+          
                         
                         
                     }

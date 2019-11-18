@@ -13,7 +13,7 @@
 
     <body>
         <?php
-            if (!isset($_SESSION['success'])) header('location: index.php');
+            if (!isset($_SESSION['success'])) header( "refresh:0; url=../index.php" );//header('location: index.php');
         ?>
         <div class="main_wrapper">
             
@@ -58,8 +58,9 @@
                         //do something with values from array
                         $imgpath = "uploads/".$value['imagename'];
 
-                                echo '<img src="'.$imgpath.'" alt="Smiley face" height="200" width="200">';
+                                echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300">';
                     }
+                    
     
                 }
                 catch (PDOException $e)
@@ -80,8 +81,6 @@ if($offset < 0 || ($offset - 5) < 0){
 ?>
             
             </div>
-
-            
             <div id="footer">
                 <p> &copyWTC</p>
             </div>

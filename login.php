@@ -25,9 +25,11 @@
 
                     <button type="submit" name="login" class="btn"> Sign In </button>
                 <p>Not registered?  <a href="signup.php">Sign Up</a></p>
-                <p><a href="forgot_password.php">Forgot password?</a></p>
+                <p>Our Gallery  <a href="gallery.php">Browse..</a></p>
                 </form>
             </div>
         </div>
     </body>
+    <div id="footer">
+                <p> &copyWTC</p>
 </html>
