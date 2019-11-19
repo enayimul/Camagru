@@ -13,10 +13,10 @@
 
 <div class="menubar">
                 <ul id="menu">
-                    <li><a href="home.php?link=1" name="link1">Home</a></li>
+                    <!-- <li><a href="home.php?link=1" name="link1">Home</a></li> -->
                     <li><a href="home.php?link=2" name="link2">Gallery</a></li>
              
-                    <li><a href="home.php??link=4" name="link4">Account settings</a></li>
+                    <!-- <li><a href="home.php??link=4" name="link4">Account settings</a></li> -->
                     <?php
                             if (isset($_SESSION['logged_in'])){
                                 echo '<li><a href="home.php?link=5" name="link5">Logout</a></li>';
@@ -29,7 +29,7 @@
                   
 
 
-                    <li><a href="capture.php" name="link6">Screenshot</a>
+                    <!-- <li><a href="capture.php" name="link6">Screenshot</a> -->
                 </ul>
             </div>
 <h2>CAMAGRU</h2><hr>

@@ -13,7 +13,7 @@
 
     <body>
         <?php
-            if (!isset($_SESSION['success'])) header( "refresh:0; url=../index.php" );//header('location: index.php');
+            // if (!isset($_SESSION['success'])) header( "refresh:0; url=../index.php" );//header('location: index.php');
         ?>
         <div class="main_wrapper">
             
@@ -49,7 +49,7 @@
                     $db = new PDO("mysql:host=$servername;dbname=camagru", $db_username, $db_password);
                 // set the PDO error mode to exception
                     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $sql = "SELECT * FROM pictures LIMIT $offset, 5";
+                    $sql = "SELECT * FROM pictures ORDER by up_date DESC  LIMIT $offset, 5";
                     $stmt = $db->prepare($sql);
                     $stmt->execute();
                     $user = $stmt->fetchAll();
@@ -58,7 +58,7 @@
                         //do something with values from array
                         $imgpath = "uploads/".$value['imagename'];
 
-                                echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300">';
+                                echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300"><input type="textarea" name="comments">';
                     }
                     
     

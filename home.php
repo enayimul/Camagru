@@ -62,7 +62,7 @@
                     }
                     else if ($link == '2')
                     {
-                        if(!isset($_SESSION['logged_in'])) header( "refresh:0; url=index.php" );
+                        // if(!isset($_SESSION['logged_in'])) header( "refresh:0; url=index.php" );
                         $offset = 0;
                         if(isset($_GET['offset'])){
                             $offset = $_GET['offset'];
@@ -134,17 +134,7 @@
                     }
                     else if ($link == '6')
                     {
-                        // echo '<div style="display: flex"><div style="display: grid"><video id="video" autoplay></video><button id="snap" style="width: 80px">Capture</button></div><div style="display: grid"><canvas id="canvas" width=300 height=300></canvas><button id="save" style="width: 80px">Save</button></div></div><script src="camera.js"></script>';
-                        // $img = $_POST['img'];
-                       
-                        // $new_name = uniqid().".png";
-                        // $dest = "resources/saved_images/".$new_name;
-                        // file_put_contents($dest, $img);
-                    }
-                    else
-                    {  
-                        //var_dump($_SESSION);
-                        // echo"default home";
+                     
                     }
                 ?>
             </div>

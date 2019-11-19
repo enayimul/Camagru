@@ -19,7 +19,8 @@ try {
     $sql = "CREATE TABLE IF NOT EXISTS pictures (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
         username VARCHAR(20) NOT NULL,
-        imagename VARCHAR(100) NOT NULL
+        imagename VARCHAR(100) NOT NULL,
+        `up_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         )";
         $db->exec($sql);
     }
