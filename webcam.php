@@ -56,8 +56,7 @@ if ($_SESSION['pic'] == 0)
    <form method =  "post">
         <select name  = "sticker">
             <option value = "./img/sticker01.png">spiderman</option>
-            <option value = "./img/sticker02.jpg">batman</option>
-            <option value = "./img/sticker03.jpg">pepe</option>
+            <option value = "./img/sticker02.png">slingshot</option>
         </select>
         <input type = "submit" name = "apply" value = "Apply Sticker">
     </form>
@@ -83,7 +82,7 @@ if (isset($_POST['apply']))
     $marge_bottom = 2;
     $sx = imagesx($stamp);
     $sy = imagesy($stamp);
-    imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 20, 40, imagesx($stamp), imagesy($stamp));
+    imagecopy($im, $stamp, -50, imagesy($im) - $sy - $marge_bottom, 20, 40, imagesx($stamp), imagesy($stamp));
     imagejpeg($im,"images/".$output);
     imagedestroy($im);
    // $images = "output".date('Y-m-dH-i-s').".jpeg";
@@ -92,6 +91,7 @@ if (isset($_POST['apply']))
 
 if (isset($_POST['database']))
 {
+    session_start();
     include_once('config/database.php');
     include_once('config/setup.php'); 
     // session_start();
@@ -99,6 +99,7 @@ if (isset($_POST['database']))
     // $x = explode(',', $imgfile);
     // $photo = base64_decode($x[1]);
     // $img_name = uniqid().".png";
+    $username = $_SESSION['username'];
     if (!file_exists("uploads/"))
     {
         mkdir("uploads/");
@@ -106,8 +107,51 @@ if (isset($_POST['database']))
     copy("images/".$output, "uploads/".$output);
     $check = "INSERT INTO camagru.pictures (username, imagename) VALUES(?,?)";
     $sql = $db->prepare($check);
-    $sql->execute(['use',$output]);
+    $sql->execute([$username,$output]);
     echo '<script>alert("Image uploaded")</script>';
     echo '<script>window.location = "gallery.php"</script>';
-}   
+} 
+include "config/database.php";
+            $offset = 0;
+            if(isset($_GET['offset'])){
+                $offset = $_GET['offset'];
+            }
+            if($offset < 0){
+                $offset = 0;
+            }
+            ////////////////////load gallery/////////////////////////
+                try
+                {
+                    $db = new PDO("mysql:host=$servername;dbname=camagru", $db_username, $db_password);
+                // set the PDO error mode to exception
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $sql = "SELECT * FROM pictures ORDER by up_date DESC  LIMIT $offset, 5";
+                    $stmt = $db->prepare($sql);
+                    $stmt->execute();
+                    $user = $stmt->fetchAll();
+                    
+                    foreach ($user as $key => $value) {
+                        //do something with values from array
+                        $imgpath = "uploads/".$value['imagename'];
+
+                                echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300">';
+                    }
+                    
+    
+                }
+                catch (PDOException $e)
+                {
+                    echo "Error here->".$e->getMessage();
+                }
+            ?>
+            </div>
+<?php
+echo "<a href='?offset=".($offset+5)."'>Next</a>";
+
+if($offset < 0 || ($offset - 5) < 0){
+    echo "<a href='?offset=0'>Prev</a>";
+
+}else{
+    echo "<a href='?offset=".($offset-5)."'>Prev</a>";
+}  
 ?>

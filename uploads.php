@@ -11,7 +11,6 @@ if(isset($_GET['upr'])){
 
     }
 }
-
 ?>
         <form action = "imgupload.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file">

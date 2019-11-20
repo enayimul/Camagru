@@ -29,7 +29,7 @@
             <div class="menubar">
                 <ul id="menu">
                     <li><a href="?link=1" name="link1">Home</a></li>
-                    <li><a href="?link=2" name="link2">Gallery</a></li>
+                    <li><a href="gallery.php" name="link2">Gallery</a></li>
                     <li><a href="?link=3" name="link3">Upload</a></li>
                     <li><a href="?link=4" name="link4">Account settings</a></li>
                     <?php
@@ -50,9 +50,7 @@
             <div id="content_area">
             <div id="content_box">
                 <?php
-
                     include "config/database.php";
-
                     $link = 1;
                     if(isset($_GET['link'])){
                     $link = $_GET['link'];

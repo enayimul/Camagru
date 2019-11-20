@@ -14,21 +14,16 @@ if(isset($_POST['register'])){
     $password = "";
 
 //////connecting to db/////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
-////////register users, retrieve form information//////////////////////////////////
-    //mysli_real_escape_string??
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password_1 = $_POST['password_1']; 
     $password_2 = $_POST['password_2'];
-/////////////////////////////////////////////////////////////////////////////////////
 ///////form validation////////////////////////////////////////////////////////////////
     if(empty($username)) {array_push($errors, "Username is required");}
     if(empty($email)) {array_push($errors, "Email is required");}
     if(empty($password_1)) {array_push($errors, "Password is required");}
     if($password_2 !== $password_1) {array_push($errors, "Passwords do not match");}
-//////////////////////////////////////////////////////////////////////////////////////
-////////unique usernames or email////////////////////////////////////////////////////////////////////////// 
+////////unique usernames or email/////////////////////////////////////////////////////
     try
     {
         $db = new PDO("mysql:host=$servername;dbname=camagru", $db_username, $db_password);
@@ -64,22 +59,13 @@ if(isset($_POST['register'])){
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <bikad58028@mailnet.top>' . "\r\n";
             if(mail($to, $subject, $message, $headers))
-            
-             echo "testmail";
             echo "A verification email has been sent to $email";
         }
         
-        //$_SESSION['username'] = $username;
-        //$_SESSION['success'] = "You are now logged in";
-        //$db->NULL;
-        //header('location: test.php');
-        // echo "A verification email has been sent to $email";
-        // echo "<p>confirmed account?".'<a href="index.php">Link</a>';
     } else {
         echo "Errors: <a href='../index.php'>Go Back</a>";
         print_r($errors);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 ///login/////////////////////////////////////////////////
 if(isset($_POST['login'])){

@@ -25,9 +25,9 @@
                 <ul id="menu">
                     <li><a href="home.php" name="link1">Home</a></li>
                     <li><a href="gallery.php" name="link2">Gallery</a></li>
-                    <li><a href="uploads.php" name="link3">Upload</a></li>
+                    <li><a href="home.php?link=3" name="link3">Upload</a></li>
                     <li><a href="?link=4" name="link4">Account settings</a></li>
-                    <li><a href="?link=5" name="link5">Logout</a></li>
+                    <li><a href="logout.php" name="link5">Logout</a></li>
                     <li><a href="capture.php" name="link6">Screenshot</a>
                 </ul>
             </div>
@@ -47,18 +47,24 @@
                 try
                 {
                     $db = new PDO("mysql:host=$servername;dbname=camagru", $db_username, $db_password);
-                // set the PDO error mode to exception
-                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $sql = "SELECT * FROM pictures ORDER by up_date DESC  LIMIT $offset, 5";
-                    $stmt = $db->prepare($sql);
-                    $stmt->execute();
-                    $user = $stmt->fetchAll();
-                    
-                    foreach ($user as $key => $value) {
-                        //do something with values from array
-                        $imgpath = "uploads/".$value['imagename'];
-
-                                echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300"><input type="textarea" name="comments">';
+                    // set the PDO error mode to exception
+                        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM pictures ORDER by up_date DESC  LIMIT $offset, 5";
+                        $stmt = $db->prepare($sql);
+                        $stmt->execute();
+                        $user = $stmt->fetchAll();
+                        
+                        $sql = "SELECT * FROM pictures ORDER by up_date DESC  LIMIT $offset, 5";
+                        $stmt = $db->prepare($sql);
+                        $stmt->execute();
+                        foreach ($user as $key => $value) {
+                            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $img_id = $results['id'];
+                            //do something with values from array
+                            $imgpath = "uploads/".$value['imagename'];
+    
+                                    echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300">';
+                                    echo " <a href='delete.php?imgid=$img_id'>delete</a>";
                     }
                     
     
@@ -71,10 +77,8 @@
             </div>
 <?php
 echo "<a href='?offset=".($offset+5)."'>Next</a>";
-
 if($offset < 0 || ($offset - 5) < 0){
     echo "<a href='?offset=0'>Prev</a>";
-
 }else{
     echo "<a href='?offset=".($offset-5)."'>Prev</a>";
 }

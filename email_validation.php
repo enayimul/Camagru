@@ -9,9 +9,8 @@ if(isset($_GET['link'])){
     if ($exists->rowCount() == 1){
       $sql = $db->prepare("UPDATE users SET email_verify = 1 WHERE link = '$link'");
       $sql->execute();
-      echo "here";
       if ($sql){
-        echo "your email has been verified you may login";
+        echo ", your email has been verified, you may login";
         //header("location: login.php");
         echo "<a href='login.php'> sign in </a>";
       }
