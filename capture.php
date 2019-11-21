@@ -27,8 +27,8 @@
          <video id="vid" width="400" height="290"></video>
      </div>
      <form method="post" action  = "webcam.php">
-     <button type = "submit" id="snap" class="capturebtn">capture</button>
-     <input type = "hidden" id = "url" name = "url">
+     <button type = "submit" id="snap" name="snap"class="capturebtn">capture</button>
+     <input type = "" id = "url" name = "url">
     </form>
      <canvas id="canvas" width="400" height="300"></canvas>
      <form method="post" >

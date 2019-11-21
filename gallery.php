@@ -59,12 +59,19 @@
                         $stmt->execute();
                         foreach ($user as $key => $value) {
                             $results = $stmt->fetch(PDO::FETCH_ASSOC);
-                            $img_id = $results['id'];
+                            $img_id = $results['img_id'];
+                           
                             //do something with values from array
                             $imgpath = "uploads/".$value['imagename'];
     
                                     echo '<img src="'.$imgpath.' " alt="Smiley face" height="300" width="300">';
                                     echo " <a href='delete.php?imgid=$img_id'>delete</a>";
+                                    echo "<form action='comments.php' method='POST' >
+                                    <input type='hidden' name='username' value ='Anonymous'>
+                                    <textarea name = 'message'> </textarea>
+                                    <button type='submit' name='comment' value='$img_id'>comment</button>
+                                    </form>";
+                                   
                     }
                     
     
@@ -86,7 +93,11 @@ if($offset < 0 || ($offset - 5) < 0){
             
             </div>
             <div id="footer">
-                <p> &copyWTC</p>
+                <p> &copyWTC  <?php if(isset($_GET['delpass'])){
+                    echo "delete successful";
+                }elseif(isset($_GET['delfail'])){
+                    echo "delete failed";
+                }  ?>   </p>
             </div>
         </div>
     </body>

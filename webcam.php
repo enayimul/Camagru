@@ -29,13 +29,20 @@
                 </ul>
             </div>
 <?php
+    include_once('config/database.php');
+    include_once('config/setup.php'); 
+    if(isset($_POST['snap'])){
 
-$image  = $_POST['url'];
+        $image  = $_POST['url'];
 
-if(!isset($_SESSION))
-{
+    }else{
+        $image = "test";
+    }
+
+ if(!isset($_SESSION))
+ {
     session_start();
-}
+ }
 
 if ($_SESSION['pic'] == 0)
 {
@@ -91,9 +98,9 @@ if (isset($_POST['apply']))
 
 if (isset($_POST['database']))
 {
-    session_start();
-    include_once('config/database.php');
-    include_once('config/setup.php'); 
+  //  session_start();
+    // include_once('config/database.php');
+    // include_once('config/setup.php'); 
     // session_start();
     // $imgfile = file_get_contents("php://input");
     // $x = explode(',', $imgfile);

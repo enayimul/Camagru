@@ -15,18 +15,19 @@
         context.drawImage(video, 0, 0, 400, 300);
 
         var image = canvas.toDataURL('image/png');
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function()
-        {
-            if (this.readyState == 4 && this.status == 200)
-            {
-                alert(this.responseText);
-            }
-        }
+        // var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function()
+        // {
+        //     if (this.readyState == 4 && this.status == 200)
+        //     {
+        //         alert(this.responseText);
+        //     }
+        // }
         document.getElementById("url").value = image;
-    //     console.log(image);
+        console.log(image);
     //    xhttp.open("post", "webcam.php",false);
     //    xhttp.send(image);
+
     });
     //save an image
     // document.getElementById('save').addEventListener('click', function(e)

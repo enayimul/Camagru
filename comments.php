@@ -1,34 +1,28 @@
 <?php
-session_start();
-include("gallery.php");
-//include("sendmail.php");
-include_once ('config/database.php');
-if(isset($_POST['comment_button']))
+include_once('config/setup.php');
+if (isset($_POST['comment']))
 {
-    $comment = $_POST['comment'];
+	session_start();
+	$imgid = $_POST['comment'];
+	$username = $_SESSION['username'];
+	$post = $_POST['message'];
+	$sql = $db->prepare("INSERT INTO camagru.comments(img_id,username,posts) VALUE(?,?,?)");
+    $arr = array($imgid,$username,$post);
+    // var_dump($arr);
+    // die();
+	if($sql->execute($arr) === TRUE)
+	{
+		$check = "SELECT email FROM users Where username=?";
+		$query = $db->prepare($check);
+		$query->execute([$username]);
+		$e = $query->fetch(PDO::FETCH_ASSOC);
+		if (!empty($e))
+		{
+			$sub = "comment";
+			$msg = "$username commented on your picture $post";
+			mail($e['email'],$sub,$msg,'MIME-Version: 1.0\r\nContent-type: text/html;charset=UTF-8'.'From: <bikad58028@mailnet.top>');		
+		}
+	}
 }
-$img_id   = $_GET['img_id'];
-$who = $_SESSION['username'];
-$query = $db->prepare("INSERT INTO comments (img_id, comment, user) VALUES ('$img_id', '$comment', '$who')");
-$query->execute();
-$query = $db->prepare("SELECT username FROM images WHERE img_id = $img_id");
-$query->execute();
-$result = $query->fetch();
-$username = $result['username'];
-$query = $db->prepare("SELECT email FROM users WHERE username = '$username'");
-$query->execute();
-$email = $query->fetch();
-$posteremail = $email['email'];
-$message = "<p>$who commented on your pic</p>
-<br>
-<br>
-comment: $comment";
-$query = $db->prepare("SELECT notify FROM users WHERE username = '$username'");
-$query->execute();
-$notificationpref = $query->fetch();
-if($notificationpref['notify'] == 1)
-{
-    send_mail($posteremail, '0', $message);
-}
-echo "<div class='success_message'>success</div>";
+header("Location: http://localhost:8080/camagru/gallery.php");
 ?>

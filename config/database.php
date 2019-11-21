@@ -10,6 +10,7 @@ try {
     $sql = "CREATE DATABASE IF NOT EXISTS camagru";
     // use exec() because no results are returned
     $db->exec($sql);
+    $db->exec("use camagru");
    // echo "Database created successfully <br>";
     }
     catch(PDOException $e)

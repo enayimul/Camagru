@@ -17,12 +17,27 @@ try {
         )";
     $db->exec($sql);
     $sql = "CREATE TABLE IF NOT EXISTS pictures (
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        img_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
         username VARCHAR(20) NOT NULL,
         imagename VARCHAR(100) NOT NULL,
         `up_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
         )";
         $db->exec($sql);
+        $sql = "CREATE TABLE IF NOT EXISTS comments (
+            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            username VARCHAR(20) NOT NULL,
+            img_id INT(6) NOT NULL,
+            `up_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            posts VARCHAR(250) NOT NULL
+            )";
+            $db->exec($sql);
+            $sql = "CREATE TABLE IF NOT EXISTS likes (
+                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                username VARCHAR(20) NOT NULL,
+                img_id INT(6) NOT NULL,
+                `up_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+                )";
+                $db->exec($sql);
     }
     catch(PDOException $e)
     {
